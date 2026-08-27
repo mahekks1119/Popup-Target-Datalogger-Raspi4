@@ -21,6 +21,8 @@ import json
 from datetime import datetime, timezone
 
 import websockets
+from websockets.asyncio.server import serve
+from websockets.exceptions import ConnectionClosed
 
 import motor_control
 
@@ -82,7 +84,7 @@ async def client_handler(websocket) -> None:
     try:
         async for raw_message in websocket:
             await handle_client_message(raw_message)
-    except websockets.exceptions.ConnectionClosed:
+    except ConnectionClosed:
         pass
     finally:
         connected_clients.discard(websocket)
@@ -113,7 +115,7 @@ async def terminal_input_loop() -> None:
 
 async def main() -> None:
     print(f"[server] Starting WebSocket server on ws://{HOST}:{PORT}")
-    async with websockets.serve(client_handler, HOST, PORT):
+    async with serve(client_handler, HOST, PORT):
         await terminal_input_loop()  # runs forever, alongside the server
 
 
