@@ -21,7 +21,6 @@ import json
 from datetime import datetime, timezone
 
 import websockets
-from websockets.server import WebSocketServerProtocol
 
 import motor_control
 
@@ -29,7 +28,7 @@ HOST = "0.0.0.0"      # listen on all interfaces on the Pi's WiFi
 PORT = 8765
 
 # Every currently-connected GUI client, so we can broadcast to all of them
-connected_clients: set[WebSocketServerProtocol] = set()
+connected_clients: set = set()
 
 
 def _now_iso() -> str:
@@ -74,7 +73,7 @@ async def handle_client_message(raw_message: str) -> None:
         print(f"[server] Unknown message type from GUI: {msg_type!r}")
 
 
-async def client_handler(websocket: WebSocketServerProtocol) -> None:
+async def client_handler(websocket) -> None:
     """One coroutine instance per connected GUI client."""
     connected_clients.add(websocket)
     client_addr = websocket.remote_address
