@@ -1,0 +1,235 @@
+:root {
+  --bg: #0c1210;
+  --panel: #121a17;
+  --panel-border: #223028;
+  --text: #d8ecdf;
+  --text-dim: #7f9a8c;
+  --accent: #4be08a;
+  --accent-dim: #2a7050;
+  --danger: #e0574b;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  padding: 20px;
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.console-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.console-title__mark {
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.console-title h1 {
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  margin: 0;
+  font-weight: 600;
+}
+
+.conn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.conn__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--danger);
+  display: inline-block;
+}
+
+.conn[data-state="connected"] .conn__dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.conn[data-state="connected"] .conn__label::before { content: ""; }
+
+.connect-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.connect-bar label {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.connect-bar input {
+  flex: 1;
+  min-width: 220px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.connect-bar button,
+.motor-btn {
+  background: var(--accent-dim);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.connect-bar button:hover,
+.motor-btn:hover {
+  background: var(--accent);
+  color: #06120c;
+  border-color: var(--accent);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 780px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.panel h2 {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px 0;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.panel__hint {
+  color: var(--text-dim);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 12px;
+}
+
+.panel__note {
+  color: var(--text-dim);
+  font-size: 11px;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.log {
+  height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: #0a0f0d;
+}
+
+.log__empty {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.log__entry {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--panel-border);
+}
+
+.log__entry:last-child { border-bottom: none; }
+
+.log__entry-time {
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.log__entry-value {
+  color: var(--accent);
+}
+
+.motor {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.motor:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.motor__label {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.motor__controls {
+  display: flex;
+  gap: 8px;
+}
+
+.motor-btn--stop {
+  background: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.motor-btn--stop:hover {
+  background: var(--danger);
+  color: #1a0a08;
+  border-color: var(--danger);
+}
+
+.motor__status {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
